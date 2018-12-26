@@ -1,4 +1,4 @@
-import cgi
+#! /usr/local/bin/python3
 
 HTML_PAGE = """Content-type: text/html charset=utf-8\n\n
 <html>
