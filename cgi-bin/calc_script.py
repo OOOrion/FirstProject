@@ -47,15 +47,6 @@ input.button4:active {{
    }}
 </style>
 	<title>Магазин іграшок</title>
-	<body>
-	<form method=POST action="http://localhost:8000/cgi-bin/show_toys.py">
-		<center><input type="submit" class="button4" value="{}"></center>
-	</form>
-	<form method=POST action="http://localhost:8000/cgi-bin/add_toy.py">
-		<center><input type="submit" class="button4" value="{}"></center>
-	</form>
-	{}
-	</body>
 </html>
 """
 
