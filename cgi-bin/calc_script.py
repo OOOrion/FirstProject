@@ -1,3 +1,5 @@
+import cgi
+
 HTML_PAGE = """Content-type: text/html charset=utf-8\n\n
 <html>
 <head> <meta charset="utf-8"></head>
