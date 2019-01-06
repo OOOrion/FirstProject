@@ -36,9 +36,9 @@ Ball.prototype.del = function(){
 }
 
 var b1 = new Ball(ctx, 'ball', 'green', 100, 100, 50);
-for (i=0;i<20;i++){
+for (i=0;i<40;i++){
   var st = true;
-  var x = rand(50, 1950);
+  var x = rand(50, 1800);
   var y = rand(50, 850);
   for (var b in balls){
     if (range(x, y, balls[b].x, balls[b].y)<=2*balls[b].r+10){
