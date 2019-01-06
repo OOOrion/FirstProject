@@ -64,10 +64,10 @@ function isInBall(x, y, ball){
 };
 
 canvas.onmousedown = function(event){
-  clearTimeout(timeoutID);
   var x = event.offsetX;
   var y = event.offsetY;
   if (isInBall(x, y, b1)) {
+    clearTimeout(timeoutID);
     canvas.onmousemove = function(event){
       var x = event.offsetX;
       var y = event.offsetY;
@@ -84,6 +84,7 @@ canvas.onmousedown = function(event){
     }
     canvas.onmouseup = function(event){
       canvas.onmousemove = null;
+      clearTimeout(timeoutID);
       bot(b1);
     }
   }
