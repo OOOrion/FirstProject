@@ -2,6 +2,8 @@ var canvas = document.getElementById('c1');
 var ctx = canvas.getContext('2d');
 var balls = [];
 
+var timeoutID;
+
 
 var Ball = function(ctx, name, color, x, y, r){
   this.name = name;
@@ -62,6 +64,7 @@ function isInBall(x, y, ball){
 };
 
 canvas.onmousedown = function(event){
+  clearTimeout(timeoutID);
   var x = event.offsetX;
   var y = event.offsetY;
   if (isInBall(x, y, b1)) {
@@ -81,6 +84,7 @@ canvas.onmousedown = function(event){
     }
     canvas.onmouseup = function(event){
       canvas.onmousemove = null;
+      bot(b1);
     }
   }
 }
@@ -128,7 +132,7 @@ Ball.prototype.goto = function(x, y, gxx, gyy){
     this.x+=gx;
     this.y+=gy;
     this.show();
-    setTimeout(function() {this.goto(x, y, gx, gy);}.bind(this), 5);
+    timeoutID = setTimeout(function() {this.goto(x, y, gx, gy);}.bind(this), 5);
   }
 }
 
