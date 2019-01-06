@@ -1,5 +1,4 @@
-function pow2(){
-    var x = document.getElementById('inp1').value;
-    var out = document.getElementById('out');
-    out.innerText = x*x;
-}
+var canvas = document.getElementById('c1');
+var ctx = canvas.getContext('2d');
+
+ctx.fillRect(200, 100, 200, 100);
