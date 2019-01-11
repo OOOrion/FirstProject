@@ -1,5 +1,78 @@
 #c1 {
-  width: 1850px;
-  height: 900px;
+  width: 1800px;
+  height: 500px;
   border: 3px solid black;
+}
+input.button4 {
+  display: inline-block;
+  color: black;
+  font-size: 125%;
+  font-weight: 700;
+  text-decoration: none;
+  user-select: none;
+  padding: .25em .5em;
+  outline: none;
+  border: 1px solid rgb(250,172,17);
+  border-radius: 7px;
+  background: rgb(255,212,3) linear-gradient(rgb(255,212,3), rgb(248,157,23));
+  box-shadow: inset 0 -2px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,0);
+  transition: box-shadow .2s, border-color .2s;
+} 
+input.button4:hover {
+  box-shadow: inset 0 -1px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,.5);
+}
+input.button4:active {
+  padding: calc(.25em + 1px) .5em calc(.25em - 1px);
+  border-color: rgba(177,159,0,1);
+  box-shadow: inset 0 -1px 1px rgba(0,0,0,.1), inset 0 1px 2px rgba(0,0,0,.3), inset 0 0 0 60px rgba(255,255,0,.45);
+}
+
+input.button1 {
+  position: relative;
+  display: inline-block;
+  font-size: 24px;
+  font-weight: bold;
+  color: hsl(88, 70%, 30%);
+  text-shadow: rgba(255,255,255,.5) 0 -1px 0, rgba(0,0,0,.2) 0 .18em .15em;
+  text-decoration: none;
+  user-select: none;
+  margin: .5em;
+  padding: .5em .6em .4em .6em;
+  border-radius: 8px;
+  border-top: 1px solid rgba(255,255,255,.1);
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  outline: none;
+  background: #a2cf70 radial-gradient(rgba(255,255,255,0), rgba(255,255,255,.5));
+  box-shadow:
+   inset rgba(255,255,255,.6) 0 .3em .3em,
+   inset rgba(0,0,0,.2) 0 -.1em .3em,
+   rgb(128,161,103) 0 7px 1px,
+   rgba(0,0,0,.2) 0 .5em 5px;
+  transition: background .2s ease-in-out;
+}
+input.button1:hover {
+  background-color: hsl(88, 70%, 75%);
+}
+input.button1:active {
+  top: .2em;
+  color: rgba(254,255,255,.9);
+  text-shadow: rgba(0,0,0,.2) 0 1px 2px;
+  box-shadow:
+   inset rgba(255,255,255,.6) 0 .3em .3em,
+   inset rgba(0,0,0,.2) 0 -.1em .3em,
+   rgba(0,0,0,.4) 0 .1em 1px,
+   rgba(0,0,0,.3) 0 .2em 6px;
+}
+input.button1:after {
+  content:  "";
+  position:  absolute; 
+  width:   90%;
+  height:  60%;
+  top:   0;
+  left:   5%;    
+  border-radius:    .5em .5em 1em 1em / .5em .5em 2em 2em;
+  background-image: linear-gradient(rgba(255,255,255,.55), rgba(255,255,255,.3)); 
+}
+.button:active:after {
+  opacity: .6;
 }
