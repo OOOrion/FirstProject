@@ -2,6 +2,10 @@ var canvas = document.getElementById('c1');
 var ctx = canvas.getContext('2d');
 var balls = [];
 
+var mainballs = [];
+
+var startRadius = 50;
+
 var timeoutID;
 
 
@@ -36,10 +40,10 @@ Ball.prototype.del = function(){
 }
 
 var b1 = new Ball(ctx, 'ball', 'green', 100, 100, 50);
-for (i=0;i<40;i++){
+for (i=0;i<20;i++){
   var st = true;
-  var x = rand(50, 1800);
-  var y = rand(50, 850);
+  var x = rand(100, 1450);
+  var y = rand(100, 450);
   for (var b in balls){
     if (range(x, y, balls[b].x, balls[b].y)<=2*balls[b].r+10){
       i-=1;
@@ -58,37 +62,14 @@ for (var b in balls){
 
 b1.show();
 
+mainballs.push(b1);
+
+
+
 function isInBall(x, y, ball){
   if (Math.pow(x-ball.x, 2)+Math.pow(y-ball.y, 2)<=Math.pow(ball.r, 2)){return true;}
   else {return false;}
 };
-
-canvas.onmousedown = function(event){
-  var x = event.offsetX;
-  var y = event.offsetY;
-  if (isInBall(x, y, b1)) {
-    clearTimeout(timeoutID);
-    canvas.onmousemove = function(event){
-      var x = event.offsetX;
-      var y = event.offsetY;
-      b1.del();
-      for (var b in balls){
-        b1.eat(balls[b]);
-      }
-      for (var b in balls){
-        balls[b].show();
-      }
-      b1.x = x;
-      b1.y = y;
-      b1.show();
-    }
-    canvas.onmouseup = function(event){
-      canvas.onmousemove = null;
-      clearTimeout(timeoutID);
-      bot(b1);
-    }
-  }
-}
 
 function rand(mn, mx){
   return (Math.round(mn + Math.random()*(mx-mn)), Math.round(mn + Math.random()*(mx-mn)));
@@ -109,11 +90,36 @@ Ball.prototype.eat = function(ball){
   }
 }
 
-Ball.prototype.goto = function(x, y, gxx, gyy){
+Ball.prototype.goto = function(x, y, gxx, gyy, mode){
   if (range(this.x, this.y, x, y)<=this.r-26){
-    bot(this);
-  }
-  else{
+    if (mode!="agar") bot(this);
+    else {
+      if (range(this.x, this.y, x, y)<0.5) clearTimeout(timeoutID);
+      else {
+        for (var b in balls){
+      b1.eat(balls[b]);
+     }
+    this.del();
+    for (var b in balls){
+      balls[b].show();
+     }
+    
+    var d = range(this.x, this.y, x, y);
+    var dx = x - this.x;
+    var dy = y - this.y;
+    if (gxx==null && gyy==null){
+      gx = dx/d;
+      gy = dy/d;
+    }
+    clearTimeout(timeoutID);
+    this.x+=gx;
+    this.y+=gy;
+    this.show();
+    timeoutID = setTimeout(function() {this.goto(x, y, gx, gy, mode);}.bind(this), 1);
+      }
+    }
+    }
+  else {
     for (var b in balls){
       b1.eat(balls[b]);
      }
@@ -129,16 +135,44 @@ Ball.prototype.goto = function(x, y, gxx, gyy){
       gx = dx/d;
       gy = dy/d;
     }
-    
+    clearTimeout(timeoutID);
     this.x+=gx;
     this.y+=gy;
     this.show();
-    timeoutID = setTimeout(function() {this.goto(x, y, gx, gy);}.bind(this), 5);
+    timeoutID = setTimeout(function() {this.goto(x, y, gx, gy, mode);}.bind(this), 1);
   }
 }
 
+//anvas.onmousedown = function(event){
+//  var x = event.offsetX;
+//  var y = event.offsetY;
+ // if (isInBall(x, y, b1)) {
+//    clearTimeout(timeoutID);
+//    canvas.onmousemove = function(event){
+ //     var x = event.offsetX;
+ //     var y = event.offsetY;
+ //     b1.del();
+ //     for (var b in balls){
+ //       b1.eat(balls[b]);
+ //     }
+ //     for (var b in balls){
+ //       balls[b].show();
+ //     }
+ //     b1.x = x;
+ //     b1.y = y;
+ //     b1.show();
+ //   }
+ //   canvas.onmouseup = function(event){
+ //     canvas.onmousemove = null;
+ //     clearTimeout(timeoutID);
+ //     bot(b1);
+ //   }
+ // }
+//
 
 function bot (ball){
+  canvas.onmousemove = null;
+  clearTimeout(timeoutID);
   var gx = null;
   var gy = null;
   var mn = 1000000;
@@ -151,7 +185,30 @@ function bot (ball){
   }
   var tx = aim.x;
   var ty = aim.y;
-  ball.goto(tx, ty, gx, gy);
+  ball.goto(tx, ty, gx, gy, "bot");
 }
 
 bot(b1);
+
+function agar(ball){
+    if (document.attachEvent != null) {
+        var x = window.event.clientX;
+        var y = window.event.clientY;
+    } else if (!document.attachEvent && document.addEventListener) {
+       var x = event.clientX;
+       var y = event.clientY;
+     
+  canvas.onmousemove = function(event){
+    clearTimeout(timeoutID);
+    var x = event.pageX;
+    var y = event.pageY;
+    x-=10;
+    y-=8;
+    ball.goto(x, y, null, null, "agar");
+  }
+    
+    ball.goto(x, y, null, null, "agar");
+    
+  }
+}
+
