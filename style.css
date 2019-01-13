@@ -1,8 +1,3 @@
-#c1 {
-  width: 1800px;
-  height: 500px;
-  border: 3px solid black;
-}
 input.button4 {
   display: inline-block;
   color: black;
@@ -75,4 +70,8 @@ input.button1:after {
 }
 .button:active:after {
   opacity: .6;
+}
+
+#c1 {
+  border: 3px solid black;
 }
