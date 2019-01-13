@@ -8,6 +8,10 @@ var startRadius = 50;
 
 var timeoutID;
 
+var dimension = [document.documentElement.clientWidth, document.documentElement.clientHeight];
+canvas.width = dimension[0]-35;
+canvas.height = dimension[1];
+
 
 var Ball = function(ctx, name, color, x, y, r){
   this.name = name;
@@ -42,8 +46,8 @@ Ball.prototype.del = function(){
 var b1 = new Ball(ctx, 'ball', 'green', 100, 100, 50);
 for (i=0;i<20;i++){
   var st = true;
-  var x = rand(100, 1450);
-  var y = rand(100, 450);
+  var x = rand(100, canvas.width-100);
+  var y = rand(100, canvas.height-100);
   for (var b in balls){
     if (range(x, y, balls[b].x, balls[b].y)<=2*balls[b].r+10){
       i-=1;
@@ -115,7 +119,7 @@ Ball.prototype.goto = function(x, y, gxx, gyy, mode){
     this.x+=gx;
     this.y+=gy;
     this.show();
-    timeoutID = setTimeout(function() {this.goto(x, y, gx, gy, mode);}.bind(this), 1);
+    timeoutID = setTimeout(function() {this.goto(x, y, gx, gy, mode);}.bind(this), 0);
       }
     }
     }
@@ -132,14 +136,14 @@ Ball.prototype.goto = function(x, y, gxx, gyy, mode){
     var dx = x - this.x;
     var dy = y - this.y;
     if (gxx==null && gyy==null){
-      gx = dx/d;
-      gy = dy/d;
+      gx = dx/d/2;
+      gy = dy/d/2;
     }
     clearTimeout(timeoutID);
     this.x+=gx;
     this.y+=gy;
     this.show();
-    timeoutID = setTimeout(function() {this.goto(x, y, gx, gy, mode);}.bind(this), 1);
+    timeoutID = setTimeout(function() {this.goto(x, y, gx, gy, mode);}.bind(this), 0);
   }
 }
 
