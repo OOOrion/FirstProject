@@ -136,8 +136,8 @@ Ball.prototype.goto = function(x, y, gxx, gyy, mode){
     var dx = x - this.x;
     var dy = y - this.y;
     if (gxx==null && gyy==null){
-      gx = dx/d/2;
-      gy = dy/d/2;
+      gx = dx/d;
+      gy = dy/d;
     }
     clearTimeout(timeoutID);
     this.x+=gx;
